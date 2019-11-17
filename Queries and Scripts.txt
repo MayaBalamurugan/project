@@ -1,0 +1,35 @@
+-----------------------Spark Implementation-------------------
+>>>pyspark
+
+>>> df = spark.read.csv("s3://group4-swdi/swdihail/hail-1995.csv",header=True)
+>>> df.printSchema()
+To check the locations which has windspeed more than average condition
+
+>>> df.filter(df['wind_speed']>70).show()
+
+To check the average wind_speed for a particular year
+
+>>>sqlDF = spark.sql("SELECT avg(wind_speed) as Avg_windspeed FROM swdi") 
+>>> sqlDF.show()
+Filter the weather station maximum hail severity.
+
+>>>df.groupBy("wsr_id","wind_speed").max().show()
+
+Ordering the weather data according to particular station.
+
+>>>df.orderBy(df.WSR_ID.desc()).show()
+
+----------------------------------Hive Implementation-------------------------------
+
+>CREATE EXTERNAL TABLE hailw
+ >(rang INT , wsId STRING, lt INT)
+ >ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+ >LOCATION 's3://group4-swdi/swdi_hail//hails';
+
+>desc hailw;
+
+>select * from hailw
+>LIMIT 100;
+
+>select wsid , max(rang) FROM hailw
+>GROUP BY wsid;

@@ -1,0 +1,32 @@
+package SevereWeather;
+
+import java.io.IOException;
+
+//import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class SevereMapper extends Mapper<LongWritable, Text, Text, FloatWritable> {
+
+	@Override
+	public void map(LongWritable key, Text value, Context context)
+			throws IOException, InterruptedException, ArrayIndexOutOfBoundsException {
+
+		try{
+			String line = value.toString();
+		
+		String[] items = line.split(",");
+		
+		String station = items[1];
+	     Float range = Float.parseFloat(items[5]);
+		
+		context.write(new Text(station), new FloatWritable(range));
+		
+		}catch (ArrayIndexOutOfBoundsException e){
+	         System.out.println("Array index out of bound");
+	         }
+		System.out.println("end of program");
+	}
+}

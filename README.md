@@ -27,6 +27,10 @@ a)In Hive Implementation,the EMR cluster is created with a key pair.
 b) Once the Cluster starts running,the Amazon master node is connect with the SSH using the putty.
 c)Using the host name id and the created key pair,the hadoop session is established.
 d) Once the session is started,you can establish spark session using hive command.
-e)And databases and external tables were created and some queries were implemented . 
+e)And databases and external tables were created and some queries were implemented .
+
+Visualization.
+The visualization of spark implementation is obtained using the zeppelin notebook.
+The various charts and tables are created using this notebook.
 
 
